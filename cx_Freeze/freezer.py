@@ -22,7 +22,9 @@ __all__ = [ "ConfigError", "ConstantsModule", "Executable", "Freezer" ]
 EXTENSION_LOADER_SOURCE = \
 """
 def __bootstrap__():
-    import imp, os, sys
+    os = __import__("os")
+    imp = __import__("imp")
+    sys = __import__("sys")
     global __bootstrap__, __loader__
     __loader__ = None; del __bootstrap__, __loader__
 
@@ -425,7 +427,7 @@ class Freezer(object):
            binIncludes and binExcludes configuration variables using first the
            full file name, then just the base file name, then the file name
            without any version numbers.
-           
+
            Files are included unless specifically excluded but inclusions take
            precedence over exclusions."""
 
